@@ -2,10 +2,7 @@ import { guyTypes } from './guys.js';
 import { mid } from './math.js';
 import groundPng from './sprites/ground.png';
 import propsPng from './sprites/props.png';
-import {fill} from 'pxcan/fill.js';
-import {pane} from 'pxcan/pane.js';
-import { gridSheet } from 'pxcan/gridsheet.js';
-import { img } from 'pxcan/img.js';
+import { fill, pane, gridSheet, img } from 'pxcan';
 import { ROOM_SEGMENTS, GROUND_WIDTH, ROOM_WIDTH, ROOM_HEIGHT, MIN_GROUND_HEIGHT, MAX_GROUND_HEIGHT, NUM_PROPS } from './const.js';
 
 const groundImg = img(groundPng);

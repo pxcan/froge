@@ -1,8 +1,6 @@
 import { ROOM_WIDTH, ROOM_HEIGHT } from './const.js';
 import { world } from './world.js';
-import {pane} from 'pxcan/pane.js';
-import {fill} from 'pxcan/fill.js';
-import {letters} from 'pxcan/letters.js';
+import { pane, fill, letters } from 'pxcan';
 import px6 from 'pxcan/fonts/px6.js';
 
 export function worldview() {
