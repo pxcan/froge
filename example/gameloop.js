@@ -24,12 +24,13 @@ export function worldview() {
         return [up,down,right,left].map((on,i) => on ? ['↑','↓','→','←'][i] : ' ').join('')
     }
 
-    return function gameloop({ buttons }) {
+    return function gameloop({ buttons, touches }) {
         // let everything move like itself
+        touches = touches.filter(t => !t.isMouse)
         const playerBrain = {
-            left: buttons.left.pressed,
-            right: buttons.right.pressed,
-            up: buttons.up.pressed,
+            left: buttons.left.pressed || (touches[0] && touches[0].x < 35),
+            right: buttons.right.pressed || (touches[0] && touches[0].x > 90-35),
+            up: buttons.up.pressed || (touches[0] && touches[0].x >= 35 && touches[0].x <= 90-35 && touches[0].justPressed) || (touches[1] && touches[1].justPressed),
             down: buttons.down.pressed,
         };
 
@@ -100,8 +101,8 @@ function dead(playback) {
     console.log('bye')
     console.log(playback.map(({brain,time}) => `|${brain}|${('     '+time).substr(-6)}`).join('\n'))
 
-    return function gameloop({ buttons }) {
-        if ([buttons.ok, buttons.left, buttons.right, buttons.up, buttons.down].some(b => b.justPressed)) {
+    return function gameloop({ buttons, touches }) {
+        if ([buttons.ok, buttons.left, buttons.right, buttons.up, buttons.down, touches[0]||{}].some(b => b.justPressed)) {
             return { gameloop: worldview() };
         } else {
             return {}
