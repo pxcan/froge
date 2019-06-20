@@ -26,6 +26,7 @@ const plugins = prod ? [
   json(),
   url(),
   serve({
+    host: '0.0.0.0',
     contentBase: 'www'
   }),
   livereload(),
