@@ -24,13 +24,20 @@ export function worldview() {
         return [up,down,right,left].map((on,i) => on ? ['↑','↓','→','←'][i] : ' ').join('')
     }
 
+    let touchdir = 0;
+
     return function gameloop({ buttons, touches }) {
-        // let everything move like itself
+        // ignore mouse
         touches = touches.filter(t => !t.isMouse)
+
+        const stickTouch = touches.find(t => t.x0 > 45);
+        touchdir = stickTouch ? (stickTouch.dx || touchdir) : 0;
+
+        // let everything move like itself
         const playerBrain = {
-            left: buttons.left.pressed || (touches[0] && touches[0].x < 35),
-            right: buttons.right.pressed || (touches[0] && touches[0].x > 90-35),
-            up: buttons.up.pressed || (touches[0] && touches[0].x >= 35 && touches[0].x <= 90-35 && touches[0].justPressed) || (touches[1] && touches[1].justPressed),
+            left: buttons.left.pressed || touchdir < 0,
+            right: buttons.right.pressed || touchdir > 0,
+            up: buttons.up.pressed || touches.some(t => t.x0 < 45 && t.justPressed),
             down: buttons.down.pressed,
         };
 
