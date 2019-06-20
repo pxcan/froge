@@ -1,6 +1,7 @@
 import { guy } from './guy.js';
 import { ROOM_WIDTH } from './const.js';
 import { mid } from './math.js';
+import * as gb from 'gameboy-sound';
 
 export const froge = guy((base) => ({
     ...base,
@@ -25,8 +26,13 @@ export const froge = guy((base) => ({
         if (brain.left) { this.xa = -1; this.flip = 'h'; }
         else if (brain.right) { this.xa = 1; this.flip = ''; }
         else this.xa = 0;
-        if (brain.up && this.isGrounded() && this.state === 'standing')
+        if (brain.up && this.isGrounded() && this.state === 'standing') {
             this.yv = -2.5;
+            gb.pulse1.envelope(6, 1);
+            gb.pulse1.duty(1);
+            gb.pulse1.sweep(3, 3, true)
+            gb.pulse1.play(gb.C5)
+        }
     },
     frame() {
         if (!this.isGrounded()) return 3;
