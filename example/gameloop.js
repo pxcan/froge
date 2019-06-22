@@ -98,13 +98,8 @@ export function worldview() {
 }
 
 function dead(playback) {
-    gb.noise1.effect(4, 6, true);
-    gb.noise1.envelope(7, 3);
-    gb.noise1.play()
-    gb.pulse1.duty(0)
-    gb.pulse1.sweep(4, 9)
-    gb.pulse1.envelope(6, 8)
-    gb.pulse1.play(gb.A5);
+    gb.noise1({ freq:6<<7, buzzy:true, volume:7, fade:3 })
+    gb.pulse1({ freq:gb.A5, duty:0, volume:6, fade:8, sweepFactor: -4, sweepPeriod: 9 })
     console.log('bye')
     console.log(playback.map(({brain,time}) => `|${brain}|${('     '+time).substr(-6)}`).join('\n'))
 
