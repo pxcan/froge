@@ -10,10 +10,10 @@ export function worldview() {
 
     let helloFrog = null;
 
-    function updateText() {
+    function updateText(str=`world ${seed}-${player.roomNum+1}`) {
         helloFrog = pane(90, 6, [
             fill('black'),
-            letters(px6, `world ${seed}-${player.roomNum+1}`).single().at(1, 0)
+            letters(px6, str).single().at(1, 0)
         ]);
     }
     updateText();
@@ -24,12 +24,23 @@ export function worldview() {
         return [up,down,right,left].map((on,i) => on ? ['↑','↓','→','←'][i] : ' ').join('')
     }
 
+    const leanThreshold = 3;
+    let lean = 0;
     return function gameloop({ buttons, touches }) {
         // let everything move like itself
-        touches = touches.filter(t => !t.isMouse)
+        touches = touches.filter(t => !t.isMouse);
+        if (touches.length === 0) {
+            lean = 0;
+        } else if (touches.length === 2) {
+            lean = Math.abs(lean) >= 4 ? Math.sign(lean)*leanThreshold : 0;
+        } else if (touches.length === 1) {
+            if (touches[0].x < 35) lean--;
+            else if (touches[0].x > 90-35) lean++;
+        }
+        updateText(JSON.stringify({t:touches.length,l:lean}))
         const playerBrain = {
-            left: buttons.left.pressed || (touches[0] && touches[0].x < 35),
-            right: buttons.right.pressed || (touches[0] && touches[0].x > 90-35),
+            left: buttons.left.pressed || lean <= -leanThreshold,
+            right: buttons.right.pressed || lean >= leanThreshold,
             up: buttons.up.pressed || (touches[0] && touches[0].x >= 35 && touches[0].x <= 90-35 && touches[0].justPressed) || (touches[1] && touches[1].justPressed),
             down: buttons.down.pressed,
         };
