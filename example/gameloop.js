@@ -32,12 +32,12 @@ export function worldview() {
         if (touches.length === 0) {
             lean = 0;
         } else if (touches.length === 2) {
-            lean = Math.abs(lean) >= 4 ? Math.sign(lean)*leanThreshold : 0;
+            lean = Math.abs(lean) >= leanThreshold ? Math.sign(lean)*leanThreshold : 0;
         } else if (touches.length === 1) {
             if (touches[0].x < 35) lean--;
             else if (touches[0].x > 90-35) lean++;
         }
-        updateText(JSON.stringify({t:touches.length,l:lean}))
+        // updateText(JSON.stringify({t:touches.length,l:lean}))
         const playerBrain = {
             left: buttons.left.pressed || lean <= -leanThreshold,
             right: buttons.right.pressed || lean >= leanThreshold,
