@@ -6,36 +6,6 @@
   <title>GAME</title>
 </head>
 <body>
-  <script>
-    /** Alert if something is broken */
-    window.onerror = function() {
-      alert('Game broke! ' + [].join.call(arguments, ' | '))
-    }
-
-    /** Injects a polyfills for Promise and fetch, if needed */
-    function polyfillPromiseFetch() {
-      if (!('fetch' in window)) {
-        var script = document.createElement('script');
-        script.src = 'https://polyfill.io/v3/polyfill.min.js?features=fetch%2CPromise';
-        script.crossOrigin = 'anonymous';
-        document.head.appendChild(script);
-      }
-    }
-    /** Tries to use native ESM import statement, but falls back on a polyfill (shimport) */
-    function shimport(src) {
-      try {
-        new Function('import("' + src + '")')();
-      } catch (e) {
-        polyfillPromiseFetch();
-        var script = document.createElement('script');
-        script.src = 'https://unpkg.com/shimport';
-        script.dataset.main = src;
-        document.head.appendChild(script);
-      }
-    }
-
-    /** Now, import the game */
-    shimport('./build/index.js');
-  </script>
+  <script src="build/index.js"></script>
 </body>
 </html>

@@ -1,3 +1,7 @@
 node_modules
 /www/build
 /*.log
+
+# Cordova
+/platforms/
+/plugins/

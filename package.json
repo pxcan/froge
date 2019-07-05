@@ -33,6 +33,8 @@
     "@babel/core": "^7.3.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.3.4",
+    "cordova": "^9.0.0",
+    "cordova-android": "^8.0.0",
     "gameboy-sound": "0.0.2",
     "pxcan": "0.0.6",
     "rollup": "^1.11.2",
@@ -48,5 +50,10 @@
     "if-env": "^1.0.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-serve": "^1.0.1"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
   }
 }
