@@ -8,7 +8,7 @@
         Nigel.FYI
     </author>
     <content src="index.html"/>
-    <preference name="Orientation" value="portrait"/>
+    <preference name="Orientation" value="landscape"/>
     <platform name="android">
         <preference name="android-minSdkVersion" value="21"/>
     </platform>
