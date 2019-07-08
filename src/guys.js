@@ -1,7 +1,7 @@
 import { guy } from './guy.js';
 import { ROOM_WIDTH } from './const.js';
 import { mid } from './math.js';
-import * as gb from 'gameboy-sound';
+// import * as gb from 'gameboy-sound';
 
 export const froge = guy((base) => ({
     ...base,
@@ -28,7 +28,7 @@ export const froge = guy((base) => ({
         else this.xa = 0;
         if (brain.up && this.isGrounded() && this.state === 'standing') {
             this.yv = -2.5;
-            gb.pulse1({ freq:gb.C5, volume:6, fade:1, duty:1, sweepFactor:3, sweepPeriod:3 })
+            // gb.pulse1({ freq:gb.C5, volume:6, fade:1, duty:1, sweepFactor:3, sweepPeriod:3 })
         }
     },
     frame() {
