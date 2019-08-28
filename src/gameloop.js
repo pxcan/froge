@@ -2,7 +2,7 @@ import { ROOM_WIDTH, ROOM_HEIGHT } from './const.js';
 import { world } from './world.js';
 import { pane, fill, letters } from 'pxcan';
 import px6 from 'pxcan/fonts/px6.js';
-// import * as gb from 'gameboy-sound';
+import * as gb from 'gameboy-sound';
 
 export function worldview() {
     const seed = 76576;
@@ -102,8 +102,8 @@ export function worldview() {
 }
 
 function dead(playback) {
-    // gb.noise1({ freq:6<<7, buzzy:true, volume:7, fade:3 })
-    // gb.pulse1({ freq:gb.A5, duty:0, volume:6, fade:8, sweepFactor: -4, sweepPeriod: 9 })
+    gb.noise1({ freq:6<<7, buzzy:true, volume:7, fade:3 })
+    gb.pulse1({ freq:gb.A5, duty:0, volume:6, fade:8, sweepFactor: -4, sweepPeriod: 9 })
     console.log('bye')
     console.log(playback.map(({brain,time}) => `|${brain}|${('     '+time).substr(-6)}`).join('\n'))
 
