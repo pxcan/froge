@@ -28,7 +28,7 @@ export const froge = guy((base) => ({
         else this.xa = 0;
         if (brain.up && this.isGrounded() && this.state === 'standing') {
             this.yv = -2.5;
-            gb.pulse1({ freq:gb.C5, volume:6, fade:1, duty:1, sweepFactor:3, sweepPeriod:3 })
+            gb.play(0, [{ freq:gb.C5, volume:6, fade:1, duty:1, sweepFactor:3, sweepPeriod:3 }, 0.05])
         }
     },
     frame() {

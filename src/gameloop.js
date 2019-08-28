@@ -102,8 +102,8 @@ export function worldview() {
 }
 
 function dead(playback) {
-    gb.noise1({ freq:6<<7, buzzy:true, volume:7, fade:3 })
-    gb.pulse1({ freq:gb.A5, duty:0, volume:6, fade:8, sweepFactor: -4, sweepPeriod: 9 })
+    gb.play(3, [{ freq:6<<7, buzzy:true, volume:7, fade:3 }, 1])
+    gb.play(0, [{ freq:gb.A5, duty:0, volume:6, fade:8, sweepFactor: -4, sweepPeriod: 9 }, 1])
     console.log('bye')
     console.log(playback.map(({brain,time}) => `|${brain}|${('     '+time).substr(-6)}`).join('\n'))
 
